@@ -1,4 +1,4 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -34,27 +34,22 @@
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand">
-                    <a href="#">
-                        BUNY
-                    </a>
+                    <a href="#">BUNY</a>
                 </li>
                 <li>
-                    <a href="sessions">Search Session</a>
+                    <a href="sessions">Sessions</a>
                 </li>
                 <li>
                     <a href="add_travel">Add Travel</a>
                 </li>
-					 <li>
-                    <a href="profile">Profile</a>
+                <li>
+                    <a href="add_car">Add Car</a>
                 </li>
                 <li>
-                    <a href="#">Add Car</a>
+                    <a href="add_feedback">Make Feedback</a>
                 </li>
                 <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
+                    <a href="feedbacks">Show Feedbacks</a>
                 </li>
                 <li>
                     <a href="#">Services</a>

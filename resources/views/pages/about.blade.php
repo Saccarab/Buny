@@ -1,12 +1,119 @@
-@extends('pages.master')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>BUNY Car Sharing</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
 
-@section('content')
+    /* Add a gray background color and some padding to the footer */
+    footer {
+      background-color: #f2f2f2;
+      padding: 25px;
+    }
 
-    <p>In the action of website creation, the “About Us” page is unfortunately ignored, which is one amongst the most significant and worthy pages in a website. The “About Us” page plays a very earnest role in a website. This page in itself is sufficient to arbitrate whether you are losing or achieving a valuable customer.
+  .carousel-inner img {
+    width: 400px; /* Set width to 100% */
+    height: auto ;
+    margin: auto;
+    max-height: 400px;
+  }
 
-However, any new customer who seeks to avail your products or services will go through this page in order to appraise the credibility as well as the reliability of the company. Moreover, it not only fetches the first impression of the company along with a face of business but also allows the visitors to be acquainted with the company’s profile including aims, objectives, services, achievements, and other worthy information. The most crucial thing is about to make the website solid-gold.
+  /* Hide the carousel text when the screen is less than 600 pixels wide */
+  @media (max-width: 600px) {
+    .carousel-caption {
+      display: none;
+    }
+  }
+  </style>
+</head>
+<body>
 
-After all, some aspects must be kept in mind in the midst of creating a website by web designers and web developers towards the enhancement of the look for “About Us” page, i.e.
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">BUNY Car Sharing</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="index.php">Home</a></li>
+        <li  class="active"><a href="about">About</a></li>
 
-Uniqueness: The “About Us” page must be unique in such a way so that it can strike the visitors’ notice and appear as an eye-candy to the visitors. Generally, most of the visitors do remember the entire website on account of “About Us” page by correlating the name, history and operations of the company.</p>
-@endsection
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <li><a href="register"><span class="glyphicon glyphicon-register"></span> Register</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="http://i.imgur.com/3ojkJsk.jpg" alt="Image">
+        <div class="carousel-caption">
+          <h3>Bünyamin İşeri</h3>
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="http://i.imgur.com/E9xjNpL.jpg " alt="Image">
+        <div class="carousel-caption">
+          <h3>Yalvaç Top</h3>
+
+        </div>
+      </div>
+
+      <div class="item">
+        <img src="http://i.imgur.com/mt0YcLp.jpg" alt="Image">
+        <div class="carousel-caption">
+          <h3>Ali Şan Kaya</h3>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+
+<div class="container text-center">
+  @yield('content')
+</div><br>
+
+<footer class="container-fluid text-center">
+
+</footer>
+
+</body>
+</html>

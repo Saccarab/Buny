@@ -25,18 +25,18 @@
        		<br><br>
 
              <h3>Destination</h3>
-             <input type="text" name="editor1" class="" style="width:200px;" />
+             <input type="text" name="editor1" class="" style="width:300px;" />
 
 				 <br><br>
 				 <h3>Price</h3>
-				 	<input type="number" name="price" class="" style="width:80px;" /> ₺
+				 	<input type="number" name="price" class="" style="width:80px;" />
 
 				<br><br>
   				<h3>Seats</h3>
   				<input type="number" name="seats" class="" style="width:80px;" />
 
           <br><br>
-    				<h3>Date & Time</h3>
+    				<h3>Date</h3>
 
             <input type="datetime-local" name="date">
 
@@ -48,7 +48,7 @@
              <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
              <p>
                  <input type="submit" value="Submit">
-                 <input type="reset" value="Clear">
+                 <input type="reset" value="Reset">
              </p>
          </form>
             </div>

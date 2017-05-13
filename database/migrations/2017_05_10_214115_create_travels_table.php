@@ -18,8 +18,8 @@ class CreateTravelsTable extends Migration
           $table->integer('driver_id');
           $table->string('starting_point');
           $table->string('destination');
-			 $table->integer('price');
-          $table->integer('seatsAvailable');
+			 //$table->integer('price'); WHY BUNY?
+          //$table->integer('seatsAvailable');
           $table->timestamps();
 
         });

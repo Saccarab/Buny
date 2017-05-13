@@ -66,11 +66,4 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-	 protected function createProfile(array $data)
-    {
-        return profile::create([
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-    }
 }
