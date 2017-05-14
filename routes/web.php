@@ -15,23 +15,33 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('profile', 'DataController@showP');
+//--------------------------- PROFILE -------------------------- //
+Route::get('update_profile', 'DataController@show_Profile');
 
 Route::post('update_profile', 'DataController@update_profile');
 
+//--------------------------- HOME		-------------------------- //
+
 Route::get('/home', 'HomeController@index')->name('home');
 
+//--------------------------- TRAVEL  -------------------------- //
 Route::get('add_travel', 'DataController@show_travels');
-Route::post('insert_travel', 'DataController@insert_travel');
 
-Route::get('add_car', 'DataController@show_cars');
+Route::post('travelInsert', 'DataController@insert_travel');
 
+//--------------------------- CAR  ------------------------- //
+Route::get('add_car', 'DataController@show_car');
+
+Route::post('/R', 'DataController@insert_car');
+
+//--------------------------- FEEDBACK  ------------------------- //
 Route::get('add_feedback', 'DataController@show_feed');
+
 Route::post('insert_feedback', 'DataController@insert_feedback');
 
 Route::get('feedbacks', 'DataController@show_feedback');
 
-
+//--------------------------- SESSION  ------------------------- //
 Route::get('sessions', 'DataController@show_session');
 
 Route::get('about', 'PagesController@about')->name('home');

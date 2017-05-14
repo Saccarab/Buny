@@ -52,7 +52,7 @@
         <li class="active"><a href="index.php">Home</a></li>
         <li><a href="about">About</a></li>
         <li><a href="project">Projects</a></li>
-        
+        <li><a href="contact">Contact</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

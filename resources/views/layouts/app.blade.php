@@ -52,7 +52,7 @@
                     <a href="feedbacks">Show Feedbacks</a>
                 </li>
                 <li>
-                    <a href="#">Services</a>
+                    <a href="update_profile">Profile</a>
                 </li>
                 <li>
                   <a href="{{ route('logout') }}"
