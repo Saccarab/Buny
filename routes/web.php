@@ -27,7 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //--------------------------- TRAVEL  -------------------------- //
 Route::get('add_travel', 'DataController@show_travels');
 
-Route::post('travelInsert', 'DataController@insert_travel');
+Route::post('insert_travel', 'DataController@insert_travel');  // route error first paremeterdan veriyo!!
 
 //--------------------------- CAR  ------------------------- //
 Route::get('add_car', 'DataController@show_car');

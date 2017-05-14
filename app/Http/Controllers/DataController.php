@@ -47,10 +47,10 @@ class DataController extends Controller
 	 $Travels->session_start=$request->date;
 	 $Travels->save();
 
-	 function show_session (){
-       $Travels = DB::table('travels')->get();
-       return view('layouts.sessions', compact('Travels'));
-    }
+  }
+  function show_session (){
+	  $Travels = DB::table('travels')->get();
+	  return view('layouts.sessions', compact('Travels'));
   }
 
  //--------------------------- PROFILE -------------------------- //
@@ -82,10 +82,15 @@ class DataController extends Controller
   //--------------------------- FEEDBACK  ------------------------- //
   //--------------------------- FEEDBACK  ------------------------- //
   //--------------------------- FEEDBACK  ------------------------- //
+
   function show_feed (){
 	 return view('layouts.add_feedback');
   }
 
+  function show_feedback (){
+	 $Feedback = DB::table('feedback')->get();
+	 return view('layouts.feedbacks', compact('Feedback'));
+  }
 
   function insert_feedback (Request $request){
     $Feedback= new Feedback;
@@ -95,6 +100,10 @@ class DataController extends Controller
     $Feedback->rating=$request->rating;
     $Feedback->save();
   }
+
+//--------------------------- CAR  ------------------------- //
+//--------------------------- CAR  ------------------------- //
+//--------------------------- CAR  ------------------------- //
 
   function show_car (){
    return view('layouts.add_car');
@@ -127,8 +136,5 @@ class DataController extends Controller
       $Colors->save();
     }
 
-  function show_feedback (){
-    $Feedback = DB::table('feedback')->get();
-    return view('layouts.feedbacks', compact('Feedback'));
-  }
+
 }

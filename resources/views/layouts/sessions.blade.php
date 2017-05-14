@@ -8,7 +8,7 @@
             <div class="col-lg-12">
 
                 <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-
+					 <br><br>
             </div>
 
             <?php
