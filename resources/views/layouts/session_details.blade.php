@@ -6,18 +6,17 @@
 <style type="text/css">
 .button {
   display: inline-block;
-  border-radius: 4px;
-  background-color: #087fff;
+  border-radius: 2px;
+  background-color: #f4511e;
   border: none;
   color: #FFFFFF;
   text-align: center;
   font-size: 28px;
-  padding: 9px;
-  width: 140px;
+  padding: 20px;
+  width: 200px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
-
 }
 
 .button span {
@@ -44,48 +43,33 @@
   opacity: 1;
   right: 0;
 }
-.border{
-  border-radius: 27px 27px 27px 27px;
--moz-border-radius: 27px 27px 27px 27px;
--webkit-border-radius: 27px 27px 27px 27px;
-border: 4px double #087fff;
-
-}
 </style>
 
 <div id="page-content-wrapper">
     <div class="container-fluid">
+      <h2>Details</h2>
+ <br>
+   <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a><br>
+   <br>
         <div class="row">
             <div class="col-lg-12">
-
-                <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-					 <br><br>
             </div>
-<br><br>
+
             <?php
             foreach ($Travels as $value){
                 ?>
-                <div class="border" style="background-color:#FFFFFF; background: rgba(0,0,0,.4);color:#e6e6e6;">
+                <div style="border: 1px solid black">
 
               <?php
               echo '<strong>Driver Name: </strong>';
               echo $value->name;
 				  echo ' ';
 				  echo $value->surname;
-				  echo '<br>';
-				  echo '<strong>Driver Rating: </strong>';
-				  if($value->session_completed == 0){
-					  $result=0;
-				  }
-				  else{
-					  $result = $value->rating/$value->session_completed;
-
-			  	  }
-				  echo $result;
-				  echo '<br>';
-				  echo '<strong>Feedback Count: </strong>';
-				  echo $value->session_completed;
-              echo '<strong><br> Starting Point:</strong> ';
+              echo '<br>';
+              echo '<strong>Driver ID:</strong> ';
+              echo $value->driver_id;
+				  echo '<strong> (You need this ID to add comments!)</strong> ';
+              echo '<strong><br>Starting Point:</strong> ';
               if($value->starting_point=='1'){
                 echo 'Bahcesehir University';
               }
@@ -117,27 +101,30 @@ border: 4px double #087fff;
                 echo 'Bahcesehir University';
               }
               else{}
+
               echo '<br>';
-              echo '<strong> Destination:</strong> ';
+              echo '<strong>Destination:</strong> ';
               echo $value->destination;
               echo '<br>';
-              echo '<strong> Price: </strong> ';
+              echo '<strong>Price: </strong> ';
               echo $value->price;
               echo ' ₺';
               echo '<br>';
-              echo '<strong> Seats Available: </strong> ';
-              echo $value->seatsAvailable;
+              echo '<strong>Seats Available: </strong> ';
+              echo $value->seatsAvailable-1;
               echo '<br>';
-              echo '<strong> Starting Date & Time: </strong> ';
+              echo '<strong>Starting Date & Time: </strong> ';
               echo $value->session_start;
-              echo '<br>';
+				  echo '<br>';
+				  echo '<strong>Your car: </strong> ';
+              echo $value->color_name;
+				  echo ' ';
+				  echo $value->brand_name;
+				  echo ' ';
+				  echo $value->model_name;
+
             ?>
-            <a href="session_details&<?php echo $value->id; ?>">
-              <button class="button" style="vertical-align:middle"><span>Join </span></button>
   </div>
-</a>
-
-
 
             <?php
 

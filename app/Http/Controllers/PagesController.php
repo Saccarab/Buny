@@ -14,7 +14,7 @@ class PagesController extends Controller
       return view('pages/project');
     }
 
-    function contact (){
-      return view('pages/contact');
+    function welcome (){
+      return view('welcome');
     }
 }

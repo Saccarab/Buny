@@ -1,6 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
+<style type="text/css">
+select {
+	width: auto;
+	padding: 10px 10px;
+	border: none;
+	border-radius: 4px;
+	background-color: #f1f1f1;
+}
+.border{
+  border-radius: 27px 27px 27px 27px;
+-moz-border-radius: 27px 27px 27px 27px;
+-webkit-border-radius: 27px 27px 27px 27px;
+width:400px;
+border: 4px double #087fff;
+background-color:#FFFFFF;
+background: rgba(0,0,0,.4);
+
+
+}
+</style>
 <script src=""{{asset('/../js/ckeditor.js')}}""></script>
 <div id="page-content-wrapper">
 	<div class="container-fluid">
@@ -8,7 +28,7 @@
 			<div class="col-lg-12">
 
 			<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
-			<form  action="insert_travel" method="post">
+			<form  action="insert_travel" method="post" class="">
                   <h3>Starting Point</h3>
                   <select name=title>
                     <option value="4">Istanbul Technical University</option>

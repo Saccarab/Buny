@@ -59,11 +59,13 @@ h1 { font-size: 1.5em; margin: 10px; }
 			<a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
 
 			<form  action="insert_feedback" method="post">
-				<strong>Your Comment</strong><br>
+				<h3>Your Comment</h3><br>
         <textarea rows="4" cols="50" name="comment">
         </textarea>
 				<br>
-				<strong>Rating</strong><br>
+        <h3>Driver ID</h3><br>
+        <input type="text" name="driver_id" class="" style="width:300px;" /><br>
+				<h3>Rating</h3><br>
 
 <fieldset class="rating">
     <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
@@ -75,12 +77,13 @@ h1 { font-size: 1.5em; margin: 10px; }
     <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
     <input type="radio" id="star1half" name="rating" value="1.5" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
     <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-    <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+    <input type="radio" id="starhalf" name="rating" value="0.5" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
 </fieldset>
 
 
         <input type="hidden" name="_token" value="{{{ csrf_token() }}}"/>
         <p>
+
 						<br><br>
             <input type="submit" value="Submit">
             <input type="reset" value="Clear">

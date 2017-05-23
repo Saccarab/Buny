@@ -11,21 +11,14 @@ use App\Travel;
 use App\Feedback;
 use App\Profile;
 use App\Car;
-use App\Modelv;
+use App\Models;
 use App\Color;
 use App\Brand;
+use App\Payment;
+
 
 class DataController extends Controller
 {
-	// JOIN JOIN JOIN JOIN //
-	public function joinTravelqueries(){
-  	$Query = DB::table('travels')
-  	->join('travel_session', 'travels.id', '=', 'travel_session.travels_id')
-  	->join('passengers', 'travels.passengers_id', '=', 'passengers.travels_id')
-  	->get();
-
-  }
-
 
 //--------------------------- TRAVEL  -------------------------- //
 //--------------------------- TRAVEL  -------------------------- //
@@ -41,17 +34,55 @@ class DataController extends Controller
 	 $Travels->starting_point=$request->title;
 	 $Travels->destination=$request->editor1;
    $Travels->price=$request->price;
-   //$rules = ['price' => 'min:0|max:20'];
-   //$this->validate($request, $rules);
    $Travels->seatsAvailable=$request->seats;
 	 $Travels->session_start=$request->date;
 	 $Travels->save();
 
+	 $Travels = DB::table('travels')
+	 ->join('profiles', 'travels.driver_id', '=', 'profiles.id')
+	 ->join('cars', 'travels.driver_id', '=', 'cars.driver_id')
+	 ->join('users', 'travels.driver_id', '=', 'users.id')
+	 ->select('travels.*','profiles.*')
+	 ->get();
+	 return view('layouts.sessions', compact('Travels'));
   }
   function show_session (){
-	  $Travels = DB::table('travels')->get();
+		$Travels = DB::table('travels')
+	  ->join('profiles', 'travels.driver_id', '=', 'profiles.id')
+	  ->join('cars', 'travels.driver_id', '=', 'cars.driver_id')
+	  ->join('users', 'travels.driver_id', '=', 'users.id')
+	  ->select('travels.*','profiles.name','profiles.surname','profiles.session_completed','profiles.rating')
+	  ->get();
 	  return view('layouts.sessions', compact('Travels'));
   }
+
+	public function show_session_details($id) {
+		$Travels = DB::table('travels')
+
+		->where('travels.id', '=', $id)
+		->join('profiles', 'travels.driver_id', '=', 'profiles.id')
+		->join('cars', 'travels.driver_id', '=', 'cars.driver_id')
+		->join('brands', 'travels.driver_id', '=', 'Brands.id')
+		->join('colors', 'travels.driver_id', '=', 'colors.id')
+		->join('models', 'travels.driver_id', '=', 'models.id')
+		->get();
+
+		foreach ($Travels as $value){
+		if($value->seatsAvailable <=0){
+			echo 'Session is full!!';
+		}
+		else{
+			DB::table('travels')->where('travels.id', '=', $id)->decrement('seatsAvailable');
+			$userId = Auth::user()->id;
+			$Users = DB::table('users')
+			->where('users.id', '=', $userId)->decrement('users.balance',$value->price);
+
+			$Pass = DB::table('passengers')
+			->insert(['user_id' => $userId, 'travel_id' => $id ]);
+			return view('layouts.session_details', compact('Travels'));
+		}
+	}
+}
 
  //--------------------------- PROFILE -------------------------- //
  //--------------------------- PROFILE -------------------------- //
@@ -74,10 +105,28 @@ class DataController extends Controller
 	  $result .= "/";
 	  $result = $result . '' . $request->DOBMonth;
 	  $result .= "/";
-	  $result = $result . '	' . $request->DOBYear;
+	  $result = $result . '' . $request->DOBYear;
 	  $profile->date_of_birth = $result;
 	  $profile->save();
+		$profile = DB::table('profiles')
+ 	 ->where('profiles.id','=',Auth::id())
+ 	 ->join('users', 'profiles.id', '=', 'users.id')
+ 	 ->select('profiles.*','users.balance')
+ 	 ->get();
+   	 return view('layouts.view_profile', compact('profile'));
+		return view('layouts.view_profile');
   }
+
+	function view_Profile (){
+ 	 $profile = DB::table('profiles')
+	 ->where('profiles.id','=',Auth::id())
+	 ->join('users', 'profiles.id', '=', 'users.id')
+	 ->select('profiles.*','users.balance')
+	 ->get();
+  	 return view('layouts.view_profile', compact('profile'));
+	}
+
+
 
   //--------------------------- FEEDBACK  ------------------------- //
   //--------------------------- FEEDBACK  ------------------------- //
@@ -88,17 +137,32 @@ class DataController extends Controller
   }
 
   function show_feedback (){
-	 $Feedback = DB::table('feedback')->get();
+	 $Feedback = DB::table('feedback')
+   ->join('profiles', 'feedback.driver_id', '=', 'profiles.id')
+	 ->select('profiles.*','feedback.*')
+	 ->get();
 	 return view('layouts.feedbacks', compact('Feedback'));
   }
 
   function insert_feedback (Request $request){
     $Feedback= new Feedback;
     $Feedback->passenger_id=Auth::id();
-	 //travel id ekle??
+	 	$Feedback->driver_id=$request->driver_id;
     $Feedback->comment=$request->comment;
     $Feedback->rating=$request->rating;
     $Feedback->save();
+
+
+  $profile = DB::table('profiles')
+  ->where('profiles.id','=',$Feedback->driver_id)->increment('rating', $Feedback->rating);
+
+  $profile = DB::table('profiles')
+  ->where('profiles.id','=',$Feedback->driver_id)->increment('session_completed');
+
+  $Feedback = DB::table('feedback')->join('profiles', 'feedback.driver_id', '=', 'profiles.id')
+  ->select('profiles.*','feedback.*')
+  ->get();
+ 	 return view('layouts.feedbacks', compact('Feedback'));
   }
 
 //--------------------------- CAR  ------------------------- //
@@ -126,7 +190,7 @@ class DataController extends Controller
       $Brands->brand_name=$request->brand;
 
 		//------------ MODEL ------------- //
-      $Models = new Modelv;
+      $Models = new Models;
       $Models->id=Auth::id();
       $Models->model_name=$request->model;
 
@@ -134,7 +198,50 @@ class DataController extends Controller
       $Brands->save();
       $Models->save();
       $Colors->save();
+			return view('layouts.add_travel');
     }
 
 
+
+
+//--------------------------- PAYMENT  ------------------------- //
+//--------------------------- PAYMENT  ------------------------- //
+//--------------------------- PAYMENT  ------------------------- //
+
+function insert_payment (Request $request){
+      $Payment= new Payment;
+      $Payment->user_id=Auth::id();
+      $Payment->name_on_card=$request->name_on_card;
+			$Payment->expiration_date=$request->exp_date;
+      $Payment->credit_card_number=$request->credit_card_number;
+      $Payment->cvc=$request->cvc;
+
+
+			$result = $request->EDay;
+		  $result .= "/";
+		  $result = $result . '' . $request->EMonth;
+		  $result .= "/";
+		  $result = $result . '	' . $request->EYear;
+		  $Payment->expiration_date=$result;
+      $Payment->save();
+			return view('layouts.add_balance');
 }
+		function show_payment(){
+		    return view('layouts.payment');
+		  }
+
+		function insert_balance (Request $request){
+			DB::table('users')->where('users.id', '=', Auth::id())->increment('balance', $request->balance);
+			$Travels = DB::table('travels')
+			->join('profiles', 'travels.driver_id', '=', 'profiles.id')
+			->join('cars', 'travels.driver_id', '=', 'cars.driver_id')
+			->join('users', 'travels.driver_id', '=', 'users.id')
+			->select('travels.*','profiles.*')
+			->get();
+		 	return view('layouts.sessions', compact('Travels'));
+		}
+
+		function show_balance(){
+				return view('layouts.add_balance');
+			}
+		}

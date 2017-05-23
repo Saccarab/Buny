@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+body  {
+    background-image: url("http://i.imgur.com/i1nK04z.png");
+    background-repeat: no-repeat;
 
+
+}
+</style>
 <head>
 
     <meta charset="utf-8">
@@ -52,7 +59,16 @@
                     <a href="feedbacks">Show Feedbacks</a>
                 </li>
                 <li>
-                    <a href="update_profile">Profile</a>
+                    <a href="update_profile">Update Profile</a>
+                </li>
+                <li>
+                    <a href="view_profile">View Profile</a>
+                </li>
+                <li>
+                    <a href="payment">Payment</a>
+                </li>
+                <li>
+                    <a href="add_balance">Add Balance</a>
                 </li>
                 <li>
                   <a href="{{ route('logout') }}"

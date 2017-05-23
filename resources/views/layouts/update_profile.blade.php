@@ -1,6 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
+<style type="text/css">
+select {
+	width: auto;
+	padding: 10px 10px;
+	border: none;
+	border-radius: 4px;
+	background-color: #f1f1f1;
+}
+</style>
 <script src=""{{asset('/../js/ckeditor.js')}}""></script>
 <div id="page-content-wrapper">
 	<div class="container-fluid">
